@@ -9,6 +9,7 @@ import Foundation
 
 enum PokemonRegion: String, CaseIterable {
     
+    case national = "National"
     case kanto = "Kanto"
     case johto = "Johto"
     case hoenn = "Hoenn"
@@ -17,4 +18,5 @@ enum PokemonRegion: String, CaseIterable {
     case kalos = "Kalos"
     case alola = "Alola"
     case galar = "Galar"
+    case paldea = "Paldea"
 }

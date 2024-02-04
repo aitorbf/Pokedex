@@ -24,7 +24,7 @@ extension API.Pokemon {
         var endpoint: URL? {
             switch self {
             case .list(let request):
-                return URL(string: HttpConstants.apiBaseURL + "v2/pokemon?limit=\(request.limit)&offset=\(request.offset)")
+                return URL(string: HttpConstants.apiBaseURL + "v2/pokedex/\(request.pokedexNumber)")
             case .detail(let id):
                 return URL(string: HttpConstants.apiBaseURL + "v2/pokemon/\(id)/")
             }

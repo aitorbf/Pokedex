@@ -9,13 +9,13 @@ import Foundation
 import Combine
 
 protocol PokemonRemoteDataSource {
-    func getPokemonList(region: PokemonRegion) -> AnyPublisher<PokemonListEntity, DataError>
+    func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError>
     func getPokemonDetail(id: String) -> AnyPublisher<PokemonDetailEntity, DataError>
 }
 
 final class PokemonRemoteDataSourceDefault: PokemonRemoteDataSource {
     
-    func getPokemonList(region: PokemonRegion) -> AnyPublisher<PokemonListEntity, DataError> {
+    func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError> {
         let request = GetPokemonListRequest(region: region)
         guard let request = API.Pokemon.PokeAPI.list(request: request).urlRequest else {
             return Fail(error: DataError.invalidUrl)

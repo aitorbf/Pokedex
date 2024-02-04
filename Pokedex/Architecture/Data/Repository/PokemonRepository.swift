@@ -8,7 +8,7 @@
 import Combine
 
 protocol PokemonRepository {
-    func getPokemonList(region: PokemonRegion) -> AnyPublisher<PokemonListEntity, DataError>
+    func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError>
     func getPokemonDetail(id: String) -> AnyPublisher<PokemonDetailEntity, DataError>
 }
 
@@ -23,8 +23,8 @@ final class PokemonRepositoryDefault {
 
 extension PokemonRepositoryDefault: PokemonRepository {
     
-    func getPokemonList(region: PokemonRegion) -> AnyPublisher<PokemonListEntity, DataError> {
-        remote.getPokemonList(region: region)
+    func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError> {
+        remote.getPokedex(region: region)
     }
     
     func getPokemonDetail(id: String) -> AnyPublisher<PokemonDetailEntity, DataError> {

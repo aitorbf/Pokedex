@@ -9,35 +9,30 @@ import Foundation
 
 struct GetPokemonListRequest: Entity {
     
-    let limit: String
-    let offset: String
+    let pokedexNumber: String
     
     init(region: PokemonRegion) {
         switch region {
+        case .national:
+            pokedexNumber = "1"
         case .kanto:
-            limit = "151"
-            offset = "0"
+            pokedexNumber = "2"
         case .johto:
-            limit = "100"
-            offset = "151"
+            pokedexNumber = "3"
         case .hoenn:
-            limit = "135"
-            offset = "251"
+            pokedexNumber = "4"
         case .sinnoh:
-            limit = "108"
-            offset = "386"
+            pokedexNumber = "5"
         case .unova:
-            limit = "155"
-            offset = "494"
+            pokedexNumber = "8"
         case .kalos:
-            limit = "72"
-            offset = "649"
+            pokedexNumber = "12"
         case .alola:
-            limit = "88"
-            offset = "721"
+            pokedexNumber = "16"
         case .galar:
-            limit = "317"
-            offset = "809"
+            pokedexNumber = "27"
+        case .paldea:
+            pokedexNumber = "31"
         }
     }
 }
