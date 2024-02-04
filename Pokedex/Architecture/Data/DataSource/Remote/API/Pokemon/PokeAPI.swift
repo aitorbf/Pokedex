@@ -11,7 +11,7 @@ extension API.Pokemon {
     
     enum PokeAPI: URLRequestConvertible {
         
-        case list(request: GetPokemonListRequest)
+        case list(request: GetPokedexRequest)
         case detail(id: String)
         
         var method: HttpConstants.Method {

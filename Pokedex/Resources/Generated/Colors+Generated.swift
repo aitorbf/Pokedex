@@ -28,6 +28,11 @@ extension Theme {
         internal static let typeSteel = SwiftUI.Color("type-steel")
         internal static let typeWater = SwiftUI.Color("type-water")
     }
+    internal static let primary = SwiftUI.Color("Primary")
+    internal static let onBackground = SwiftUI.Color("onBackground")
+    internal static let onPrimary = SwiftUI.Color("onPrimary")
+    internal static let surfaceContainerLow = SwiftUI.Color("surfaceContainerLow")
+    internal static let surfaceVariant = SwiftUI.Color("surfaceVariant")
   }
 }
 

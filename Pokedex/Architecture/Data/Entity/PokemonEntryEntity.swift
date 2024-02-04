@@ -16,7 +16,7 @@ struct PokemonEntryEntity: Entity {
 extension PokemonEntryEntity {
     
     enum CodingKeys: String, CodingKey {
-        case number = "entry-number"
-        case pokemon = "pokemon-species"
+        case number = "entry_number"
+        case pokemon = "pokemon_species"
     }
 }

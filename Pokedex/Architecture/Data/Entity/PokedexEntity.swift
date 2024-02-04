@@ -15,6 +15,6 @@ struct PokedexEntity: Entity {
 extension PokedexEntity {
     
     enum CodingKeys: String, CodingKey {
-        case pokemonEntries = "pokemon-entries"
+        case pokemonEntries = "pokemon_entries"
     }
 }

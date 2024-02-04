@@ -16,7 +16,7 @@ protocol PokemonRemoteDataSource {
 final class PokemonRemoteDataSourceDefault: PokemonRemoteDataSource {
     
     func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError> {
-        let request = GetPokemonListRequest(region: region)
+        let request = GetPokedexRequest(region: region)
         guard let request = API.Pokemon.PokeAPI.list(request: request).urlRequest else {
             return Fail(error: DataError.invalidUrl)
                 .eraseToAnyPublisher()
