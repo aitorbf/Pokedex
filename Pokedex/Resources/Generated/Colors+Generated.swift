@@ -48,11 +48,17 @@ extension Theme {
     internal static let onSurfaceVariant = SwiftUI.Color("onSurfaceVariant")
     internal static let outline = SwiftUI.Color("outline")
     internal static let outlineVariant = SwiftUI.Color("outlineVariant")
+    internal static let overlay = SwiftUI.Color("overlay")
     internal static let primaryContainer = SwiftUI.Color("primaryContainer")
     internal static let red = SwiftUI.Color("red")
     internal static let surface = SwiftUI.Color("surface")
     internal static let surfaceContainerLow = SwiftUI.Color("surfaceContainerLow")
     internal static let surfaceVariant = SwiftUI.Color("surfaceVariant")
+    internal static let transparentDark = SwiftUI.Color("transparentDark")
+    internal static let transparentLight = SwiftUI.Color("transparentLight")
+    internal static let transparentPrimary12 = SwiftUI.Color("transparentPrimary12")
+    internal static let transparentPrimary30 = SwiftUI.Color("transparentPrimary30")
+    internal static let transparentPrimary5 = SwiftUI.Color("transparentPrimary5")
   }
 }
 

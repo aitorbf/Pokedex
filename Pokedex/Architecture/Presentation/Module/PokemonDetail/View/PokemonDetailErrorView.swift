@@ -1,0 +1,69 @@
+//
+//  PokemonDetailErrorView.swift
+//  Pokedex
+//
+//  Created by Aitor Baragaño Fernández on 6/2/24.
+//
+
+import SwiftUI
+
+struct PokemonDetailErrorView: View {
+    
+    var retry: () -> Void
+    
+    private let iconSize: CGFloat = 32
+    private let iconCircleSize: CGFloat = 128
+    private let buttonWidth: CGFloat = 212
+    
+    var body: some View {
+        VStack(spacing: Theme.Spacing.space_2) {
+            icon
+            explanation
+            button
+        }
+    }
+    
+    var icon: some View {
+        ZStack {
+            Image(Assets.images.pokeball)
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Theme.Color.onPrimary)
+                .frame(width: iconCircleSize, height: iconCircleSize)
+            Image(Assets.icon.exclamation)
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Theme.Color.error)
+                .frame(width: iconSize, height: iconSize)
+        }
+        .padding(.bottom, Theme.Spacing.space_2)
+    }
+    
+    var explanation: some View {
+        Text(Strings.pokemonDetailError)
+            .font(Theme.Font.body1)
+            .foregroundColor(Theme.Color.onBackground)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, Theme.Spacing.space_10)
+            .padding(.bottom, Theme.Spacing.space_1)
+    }
+    
+    var button: some View {
+        Button(Strings.pokedexRetry) {
+            retry()
+        }
+        .buttonStyle(.filled)
+        .frame(width: buttonWidth)
+    }
+}
+
+struct PokemonDetailErrorView_Previews: PreviewProvider {
+    static var previews: some View {
+        DevicesPreview {
+            ZStack {
+                Theme.Color.surfaceContainerLow.ignoresSafeArea()
+                PokemonDetailErrorView() { }
+            }
+        }
+    }
+}

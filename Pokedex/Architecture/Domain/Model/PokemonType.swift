@@ -17,7 +17,7 @@ struct PokemonType: Model {
     }
 }
 
-enum PokemonTypeName: String {
+enum PokemonTypeName: String, CaseIterable {
     case none
     case normal
     case grass

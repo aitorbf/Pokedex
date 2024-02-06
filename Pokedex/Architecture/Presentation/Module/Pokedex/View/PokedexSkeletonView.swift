@@ -88,7 +88,7 @@ struct PokedexSkeletonView: View {
     
     var number: some View {
         Circle()
-            .fill(Theme.Color.surfaceContainerLow)
+            .fill(Theme.Color.transparentPrimary5)
             .padding(.vertical, Theme.Spacing.space_1_5)
     }
     
@@ -96,14 +96,14 @@ struct PokedexSkeletonView: View {
         Image(Assets.images.pokemonShadow)
             .resizable()
             .renderingMode(.template)
-            .foregroundColor(Theme.Color.surfaceVariant)
+            .foregroundColor(Theme.Color.transparentPrimary12)
             .aspectRatio(contentMode: .fill)
             .frame(width: avatarSize, height: avatarSize)
     }
     
     var name: some View {
         Rectangle()
-            .foregroundColor(Theme.Color.surfaceContainerLow)
+            .foregroundColor(Theme.Color.transparentPrimary5)
             .frame(width: nameRectangleWidth, height: nameRectangleHeight)
             .cornerRadius(Theme.Spacing.space_1)
     }

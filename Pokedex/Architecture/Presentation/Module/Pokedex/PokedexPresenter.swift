@@ -69,6 +69,6 @@ extension PokedexPresenterDefault: PokedexPresenter {
     }
     
     func loadPokemonDetail(id: String) {
-//        router.navigateToPokemonDetail(id: id)
+        router.navigateToPokemonDetail(id: id)
     }
 }

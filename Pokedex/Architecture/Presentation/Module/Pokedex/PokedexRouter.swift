@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PokedexRouter {
-    
+    func navigateToPokemonDetail(id: String)
 }
 
 final class PokedexRouterDefault {
@@ -22,4 +22,11 @@ final class PokedexRouterDefault {
 
 extension PokedexRouterDefault: PokedexRouter {
     
+    func navigateToPokemonDetail(id: String) {
+        guard let navigationController else {
+            return
+        }
+        let viewController = PokemonDetailConfigurator(navigationController: navigationController).viewController(pokemonNumber: id)
+        navigationController.pushViewController(viewController, animated: true)
+    }
 }
