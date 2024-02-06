@@ -9,7 +9,7 @@ import Foundation
 
 enum HttpConstants {
     
-    static var baseURL: String = Environment.pro.apiUrl
+    static var baseURL: String = BackendEnvironment.pro.apiUrl
     
     static var apiBaseURL: String {
         baseURL + "api/"

@@ -11,7 +11,8 @@ protocol PokedexPresenter: ObservableObject {
     var screenState: PokedexScreenState { get set }
     var pokemonList: PokemonViewModel { get set }
     
-    func loadPokemon()
+    func loadPokedex()
+    func reload()
     func loadPokemonDetail(id: String)
 }
 
@@ -38,15 +39,12 @@ final class PokedexPresenterDefault {
     ) {
         self.getPokedexInteractor = getPokedexInteractor
         self.router = router
-        
-        loadPokemon()
     }
 }
 
 extension PokedexPresenterDefault: PokedexPresenter {
     
-    func loadPokemon() {
-        screenState = .loading
+    func loadPokedex() {
         getPokedexInteractor.execute(region: .kanto)
             .sink(
                 receiveCompletion: { completion in
@@ -63,6 +61,11 @@ extension PokedexPresenterDefault: PokedexPresenter {
                 }
             )
             .store(in: &cancellables)
+    }
+    
+    func reload() {
+        screenState = .loading
+        loadPokedex()
     }
     
     func loadPokemonDetail(id: String) {

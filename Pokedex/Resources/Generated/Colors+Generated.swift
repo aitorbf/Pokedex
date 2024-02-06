@@ -8,6 +8,7 @@ import UIKit
 
 extension Theme {
   internal enum Color {
+    internal static let background = SwiftUI.Color("Background")
     internal enum PokemonType {
         internal static let typeBug = SwiftUI.Color("type-bug")
         internal static let typeDragon = SwiftUI.Color("type-dragon")
@@ -29,8 +30,27 @@ extension Theme {
         internal static let typeWater = SwiftUI.Color("type-water")
     }
     internal static let primary = SwiftUI.Color("Primary")
+    internal static let error = SwiftUI.Color("error")
+    internal static let neutral10 = SwiftUI.Color("neutral10")
+    internal static let neutral20 = SwiftUI.Color("neutral20")
+    internal static let neutral30 = SwiftUI.Color("neutral30")
+    internal static let neutral40 = SwiftUI.Color("neutral40")
+    internal static let neutral50 = SwiftUI.Color("neutral50")
+    internal static let neutral60 = SwiftUI.Color("neutral60")
+    internal static let neutral70 = SwiftUI.Color("neutral70")
+    internal static let neutral80 = SwiftUI.Color("neutral80")
+    internal static let neutral90 = SwiftUI.Color("neutral90")
+    internal static let neutral95 = SwiftUI.Color("neutral95")
     internal static let onBackground = SwiftUI.Color("onBackground")
     internal static let onPrimary = SwiftUI.Color("onPrimary")
+    internal static let onPrimaryContainer = SwiftUI.Color("onPrimaryContainer")
+    internal static let onSurface = SwiftUI.Color("onSurface")
+    internal static let onSurfaceVariant = SwiftUI.Color("onSurfaceVariant")
+    internal static let outline = SwiftUI.Color("outline")
+    internal static let outlineVariant = SwiftUI.Color("outlineVariant")
+    internal static let primaryContainer = SwiftUI.Color("primaryContainer")
+    internal static let red = SwiftUI.Color("red")
+    internal static let surface = SwiftUI.Color("surface")
     internal static let surfaceContainerLow = SwiftUI.Color("surfaceContainerLow")
     internal static let surfaceVariant = SwiftUI.Color("surfaceVariant")
   }

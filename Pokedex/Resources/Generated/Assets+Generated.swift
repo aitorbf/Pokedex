@@ -8,9 +8,14 @@ import UIKit
 
 internal enum Assets {
   internal static var accentColor = Color("AccentColor")
+  internal enum icon {
+    internal static let exclamation: String = "exclamation"
+    internal static let warningIcon: String = "warningIcon"
+  }
   internal enum images {
     internal static let pokeball: String = "pokeball"
     internal static let pokedex: String = "pokedex"
+    internal static let pokemonShadow: String = "pokemonShadow"
   }
   internal enum pokemonTypes {
     internal static let bug: String = "bug"

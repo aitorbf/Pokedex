@@ -1,5 +1,5 @@
 //
-//  Environment.swift
+//  BackendEnvironment.swift
 //  Pokedex
 //
 //  Created by Aitor Baragaño Fernández on 28/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Environment: String {
+enum BackendEnvironment: String {
     
     case pro
     case dev

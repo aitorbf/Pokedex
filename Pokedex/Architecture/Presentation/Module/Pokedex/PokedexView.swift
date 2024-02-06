@@ -17,19 +17,24 @@ struct PokedexView<Presenter: PokedexPresenter>: View {
             switch presenter.screenState {
             case .loading:
                 EmptyView()
-//                PokedexSkeletonView()
+                PokedexSkeletonView()
             case .error:
                 EmptyView()
-//                PokedexErrorView<Presenter>()
+                PokedexErrorView {
+                    presenter.reload()
+                }            
             case .empty:
                 EmptyView()
-//                PokedexEmptyView()
+                PokedexEmptyView()
             case .content:
                 EmptyView()
                 PokedexContentView<Presenter>()
             }
         }
         .toolbar(.logo)
+        .onAppear {
+            presenter.loadPokedex()
+        }
     }
 }
 

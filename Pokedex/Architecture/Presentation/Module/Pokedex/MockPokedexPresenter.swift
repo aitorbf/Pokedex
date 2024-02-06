@@ -16,7 +16,11 @@ final class MockPokedexPresenter: PokedexPresenter {
         self.pokemonList = PokemonViewModelMapper.map(pokemonList)
     }
     
-    func loadPokemon() {
+    func loadPokedex() {
+        // Intentionally empty
+    }
+    
+    func reload() {
         // Intentionally empty
     }
     
