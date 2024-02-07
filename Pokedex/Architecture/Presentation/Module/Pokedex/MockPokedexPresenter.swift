@@ -11,6 +11,8 @@ final class MockPokedexPresenter: PokedexPresenter {
     
     var screenState: PokedexScreenState = .content
     var pokemonList: PokemonViewModel = .empty()
+    var selectedRegionIndex: Int = 0
+    var isLoading: Bool = false
     
     init(pokemonList: [Pokemon]) {
         self.pokemonList = PokemonViewModelMapper.map(pokemonList)

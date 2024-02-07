@@ -12,7 +12,7 @@ struct PokemonTypeBadgeViewModel {
     let typeName: PokemonTypeName
     
     var typeNameFormated: String {
-        typeName.rawValue.uppercased()
+        typeName.localized().uppercased()
     }
     
     var backgroundColor: Color {

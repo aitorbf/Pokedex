@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonDetailCardViewModel {
+struct PokemonDetailCardViewModel: Equatable {
     
     let number: Int
     let name: String
@@ -23,6 +23,10 @@ struct PokemonDetailCardViewModel {
     
     var numberFormated: String {
         String(format: "%03d", number)
+    }
+    
+    static func == (lhs: PokemonDetailCardViewModel, rhs: PokemonDetailCardViewModel) -> Bool {
+        lhs.number == rhs.number
     }
 }
 

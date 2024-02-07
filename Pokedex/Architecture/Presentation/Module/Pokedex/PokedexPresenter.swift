@@ -10,6 +10,8 @@ import Combine
 protocol PokedexPresenter: ObservableObject {
     var screenState: PokedexScreenState { get set }
     var pokemonList: PokemonViewModel { get set }
+    var selectedRegionIndex: Int { get set }
+    var isLoading: Bool { get set }
     
     func loadPokedex()
     func reload()
@@ -27,6 +29,12 @@ final class PokedexPresenterDefault {
     
     @Published var screenState: PokedexScreenState = .loading
     @Published var pokemonList: PokemonViewModel = .empty()
+    @Published var selectedRegionIndex: Int = 0 {
+        didSet {
+            loadPokedex()
+        }
+    }
+    @Published var isLoading: Bool = false
     
     private let getPokedexInteractor: GetPokedexInteractor
     private let router: PokedexRouter
@@ -45,14 +53,17 @@ final class PokedexPresenterDefault {
 extension PokedexPresenterDefault: PokedexPresenter {
     
     func loadPokedex() {
-        getPokedexInteractor.execute(region: .kanto)
+        if screenState == .content {
+            isLoading = true
+        }
+        getPokedexInteractor.execute(region: PokemonRegion.allCases[selectedRegionIndex])
             .sink(
                 receiveCompletion: { completion in
                     switch completion {
                     case .failure:
                         self.screenState = .error
                     case .finished:
-                        break
+                        self.isLoading = false
                     }
                 },
                 receiveValue: { pokemonList in

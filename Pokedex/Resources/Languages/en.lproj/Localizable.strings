@@ -15,3 +15,22 @@
 "pokemon_detail_retry" = "Retry";
 "pokemon_detail_weight" = "Weight";
 "pokemon_detail_height" = "Height";
+
+"pokemon_type_none" = "none";
+"pokemon_type_normal" = "normal";
+"pokemon_type_grass" = "grass";
+"pokemon_type_poison" = "poison";
+"pokemon_type_fire" = "fire";
+"pokemon_type_psychic" = "psychic";
+"pokemon_type_flying" = "flying";
+"pokemon_type_ice" = "ice";
+"pokemon_type_bug" = "bug";
+"pokemon_type_rock" = "rock";
+"pokemon_type_water" = "water";
+"pokemon_type_electric" = "electric";
+"pokemon_type_ground" = "ground";
+"pokemon_type_fairy" = "fairy";
+"pokemon_type_steel" = "steel";
+"pokemon_type_fighting" = "fighting";
+"pokemon_type_dragon" = "dragon";
+"pokemon_type_ghost" = "ghost";

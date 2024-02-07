@@ -12,20 +12,33 @@ struct PokedexContentView<Presenter: PokedexPresenter>: View {
     @EnvironmentObject var presenter: Presenter
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: Theme.Spacing.space_3) {
-                ForEach(presenter.pokemonList.pokemon, id: \.number) { pokemonCardViewModel in
-                    PokemonCard(
-                        viewModel: pokemonCardViewModel,
-                        contentPosition: (Int(pokemonCardViewModel.number) ?? 0) % 2 == 0 ? .leading : .trailing,
-                        onTap: {
-                            presenter.loadPokemonDetail(id: pokemonCardViewModel.number)
+        VStack(spacing: Theme.Spacing.space_1) {
+            RegionPicker(selectedOptionIndex: $presenter.selectedRegionIndex)
+            ScrollView {
+                ScrollViewReader { proxy in
+                    VStack(spacing: Theme.Spacing.space_3) {
+                        ForEach(Array(presenter.pokemonList.pokemon.enumerated()), id: \.element.number) { index, pokemonCardViewModel in
+                            PokemonCard(
+                                viewModel: pokemonCardViewModel,
+                                contentPosition: index % 2 == 0 ? .leading : .trailing,
+                                onTap: {
+                                    presenter.loadPokemonDetail(id: pokemonCardViewModel.number)
+                                }
+                            )
+                            .id(index)
                         }
-                    )
+                    }
+                    .padding(Theme.Spacing.space_2)
+                    .onChange(of: presenter.pokemonList.pokemon) { _ in
+                        withAnimation {
+                            proxy.scrollTo(0, anchor: .top)
+                        }
+                    }
                 }
             }
-            .padding(.all, Theme.Spacing.space_2)
         }
+        .padding(.top, Theme.Spacing.space_2)
+        .loading(isShown: $presenter.isLoading)
     }
 }
 

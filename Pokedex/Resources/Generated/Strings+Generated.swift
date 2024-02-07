@@ -25,6 +25,42 @@ internal enum Strings {
   internal static let pokemonDetailRetry = Strings.tr("Localizable", "pokemon_detail_retry", fallback: "Retry")
   /// Weight
   internal static let pokemonDetailWeight = Strings.tr("Localizable", "pokemon_detail_weight", fallback: "Weight")
+  /// bug
+  internal static let pokemonTypeBug = Strings.tr("Localizable", "pokemon_type_bug", fallback: "bug")
+  /// dragon
+  internal static let pokemonTypeDragon = Strings.tr("Localizable", "pokemon_type_dragon", fallback: "dragon")
+  /// electric
+  internal static let pokemonTypeElectric = Strings.tr("Localizable", "pokemon_type_electric", fallback: "electric")
+  /// fairy
+  internal static let pokemonTypeFairy = Strings.tr("Localizable", "pokemon_type_fairy", fallback: "fairy")
+  /// fighting
+  internal static let pokemonTypeFighting = Strings.tr("Localizable", "pokemon_type_fighting", fallback: "fighting")
+  /// fire
+  internal static let pokemonTypeFire = Strings.tr("Localizable", "pokemon_type_fire", fallback: "fire")
+  /// flying
+  internal static let pokemonTypeFlying = Strings.tr("Localizable", "pokemon_type_flying", fallback: "flying")
+  /// ghost
+  internal static let pokemonTypeGhost = Strings.tr("Localizable", "pokemon_type_ghost", fallback: "ghost")
+  /// grass
+  internal static let pokemonTypeGrass = Strings.tr("Localizable", "pokemon_type_grass", fallback: "grass")
+  /// ground
+  internal static let pokemonTypeGround = Strings.tr("Localizable", "pokemon_type_ground", fallback: "ground")
+  /// ice
+  internal static let pokemonTypeIce = Strings.tr("Localizable", "pokemon_type_ice", fallback: "ice")
+  /// none
+  internal static let pokemonTypeNone = Strings.tr("Localizable", "pokemon_type_none", fallback: "none")
+  /// normal
+  internal static let pokemonTypeNormal = Strings.tr("Localizable", "pokemon_type_normal", fallback: "normal")
+  /// poison
+  internal static let pokemonTypePoison = Strings.tr("Localizable", "pokemon_type_poison", fallback: "poison")
+  /// psychic
+  internal static let pokemonTypePsychic = Strings.tr("Localizable", "pokemon_type_psychic", fallback: "psychic")
+  /// rock
+  internal static let pokemonTypeRock = Strings.tr("Localizable", "pokemon_type_rock", fallback: "rock")
+  /// steel
+  internal static let pokemonTypeSteel = Strings.tr("Localizable", "pokemon_type_steel", fallback: "steel")
+  /// water
+  internal static let pokemonTypeWater = Strings.tr("Localizable", "pokemon_type_water", fallback: "water")
 }
 
 // MARK: - Implementation Details

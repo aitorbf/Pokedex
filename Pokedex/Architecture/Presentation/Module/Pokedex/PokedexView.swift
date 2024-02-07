@@ -16,18 +16,14 @@ struct PokedexView<Presenter: PokedexPresenter>: View {
             Theme.Color.surfaceContainerLow.ignoresSafeArea()
             switch presenter.screenState {
             case .loading:
-                EmptyView()
                 PokedexSkeletonView()
             case .error:
-                EmptyView()
                 PokedexErrorView {
                     presenter.reload()
                 }            
             case .empty:
-                EmptyView()
                 PokedexEmptyView()
             case .content:
-                EmptyView()
                 PokedexContentView<Presenter>()
             }
         }

@@ -60,7 +60,7 @@ extension PokemonDetailPresenterDefault: PokemonDetailPresenter {
                 },
                 receiveValue: { pokemonDetail in
                     self.pokemonDetail = PokemonDetailViewModelMapper.map(pokemonDetail)
-                    self.screenState = .content
+                    self.screenState = self.pokemonDetail.pokemon == .empty() ? .empty : .content
                 }
             )
             .store(in: &cancellables)

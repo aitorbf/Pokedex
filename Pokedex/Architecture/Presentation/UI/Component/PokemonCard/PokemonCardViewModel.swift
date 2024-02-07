@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonCardViewModel {
+struct PokemonCardViewModel: Equatable {
     
     let number: String
     let name: String
