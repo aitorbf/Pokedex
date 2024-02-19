@@ -11,12 +11,14 @@ struct PokedexContentView<Presenter: PokedexPresenter>: View {
     
     @EnvironmentObject var presenter: Presenter
     
+    @State private var contentID = UUID()
+    
     var body: some View {
         VStack(spacing: Theme.Spacing.space_1) {
             RegionPicker(selectedOptionIndex: $presenter.selectedRegionIndex)
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { proxy in
-                    VStack(spacing: Theme.Spacing.space_3) {
+                    LazyVStack(spacing: Theme.Spacing.space_3) {
                         ForEach(Array(presenter.pokemonList.pokemon.enumerated()), id: \.element.number) { index, pokemonCardViewModel in
                             PokemonCard(
                                 viewModel: pokemonCardViewModel,
@@ -28,9 +30,11 @@ struct PokedexContentView<Presenter: PokedexPresenter>: View {
                             .id(index)
                         }
                     }
+                    .id(contentID)
                     .padding(Theme.Spacing.space_2)
                     .onChange(of: presenter.pokemonList.pokemon) { _ in
                         withAnimation {
+                            contentID = UUID()
                             proxy.scrollTo(0, anchor: .top)
                         }
                     }
