@@ -14,7 +14,7 @@ struct PokedexContentView<Presenter: PokedexPresenter>: View {
     var body: some View {
         VStack(spacing: Theme.Spacing.space_1) {
             RegionPicker(selectedOptionIndex: $presenter.selectedRegionIndex)
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 ScrollViewReader { proxy in
                     VStack(spacing: Theme.Spacing.space_3) {
                         ForEach(Array(presenter.pokemonList.pokemon.enumerated()), id: \.element.number) { index, pokemonCardViewModel in

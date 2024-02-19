@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DDSpiderChart
 
 struct PokemonDetailCard: View {
     
@@ -13,40 +14,39 @@ struct PokemonDetailCard: View {
     private let imagePlaceholderOpacity: CGFloat = 0.5
     private let backgroundImageSize: CGFloat = 300
     private let backgroundImageOpacity: CGFloat = 0.6
-    private let dataContainerHeight: CGFloat = 0.4
-    private let backgroundOpacity: CGFloat = 0.5
+    private let backgroundOpacity: CGFloat = 0.7
+    private let maxStatValue: Int = 255
     
     let viewModel: PokemonDetailCardViewModel
     
     var body: some View {
-        GeometryReader { metrics in
-            ZStack(alignment: .center) {
-                VStack(alignment: .center, spacing: .zero) {
-                    name
-                    number
-                    Spacer()
-                }
-                backgroundImage
-                VStack {
-                    Spacer()
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(Theme.Color.onPrimary)
-                            .cornerRadius(Theme.Radius.large, corners: [.topLeft, .topRight])
-                            .ignoresSafeArea()
-                        VStack {
-                            types
-                            Spacer()
+        ScrollView(showsIndicators: false) {
+            VStack {
+                name
+                number
+                    .padding(.bottom, pokemonImageSize)
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(Theme.Color.onPrimary)
+                        .cornerRadius(Theme.Radius.large, corners: [.topLeft, .topRight])
+                        .ignoresSafeArea()
+                    VStack(spacing: .zero) {
+                        ZStack {
+                            backgroundImage
+                            pokemonImage
                         }
-                        .padding(.top, Theme.Spacing.space_8)
+                        .padding(.top, -pokemonImageSize)
+                        types
+                            .padding(.bottom, Theme.Spacing.space_2)
                         stats
+                            .padding(.bottom, Theme.Spacing.space_4)
                     }
-                    .frame(height: metrics.size.height * dataContainerHeight)
+                    .padding(.top, Theme.Spacing.space_4)
                 }
-                pokemonImage
             }
-            .background(viewModel.backgroundColor.opacity(backgroundOpacity))
         }
+        .background(viewModel.backgroundColor.opacity(backgroundOpacity))
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     var name: some View {
@@ -79,26 +79,42 @@ struct PokemonDetailCard: View {
     }
     
     var stats: some View {
-        HStack(alignment: .center) {
-            Spacer()
-            VStack {
-                Text(String(viewModel.weight))
-                    .font(Theme.Font.body1)
-                    .foregroundColor(Theme.Color.primary)
-                Text(Strings.pokemonDetailWeight)
-                    .font(Theme.Font.body1)
-                    .foregroundColor(Theme.Color.neutral40)
+        VStack {
+            HStack(alignment: .center) {
+                Spacer()
+                VStack {
+                    Text(String(viewModel.weight))
+                        .font(Theme.Font.body1)
+                        .foregroundColor(Theme.Color.primary)
+                    Text(Strings.pokemonDetailWeight)
+                        .font(Theme.Font.body1)
+                        .foregroundColor(Theme.Color.neutral40)
+                }
+                Spacer()
+                VStack {
+                    Text(String(viewModel.height))
+                        .font(Theme.Font.body1)
+                        .foregroundColor(Theme.Color.primary)
+                    Text(Strings.pokemonDetailHeight)
+                        .font(Theme.Font.body1)
+                        .foregroundColor(Theme.Color.neutral40)
+                }
+                Spacer()
             }
-            Spacer()
-            VStack {
-                Text(String(viewModel.height))
-                    .font(Theme.Font.body1)
-                    .foregroundColor(Theme.Color.primary)
-                Text(Strings.pokemonDetailHeight)
-                    .font(Theme.Font.body1)
-                    .foregroundColor(Theme.Color.neutral40)
-            }
-            Spacer()
+            
+            DDSpiderChart(
+                axes: viewModel.stats.map({ $0.nameFormated }),
+                values: [
+                    DDSpiderChartEntries(
+                        values: viewModel.stats.map({ Float($0.value) / Float(maxStatValue) }),
+                        color: viewModel.backgroundColor
+                    )
+                ],
+                color: Theme.Color.neutral70,
+                fontTitle: .systemFont(ofSize: 16),
+                textColor: Theme.Color.primary
+            )
+            .frame(width: 350, height: 300)
         }
     }
     

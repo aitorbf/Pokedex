@@ -87,7 +87,7 @@ struct PokemonStatDetailCardViewModel {
     let value: Int
     
     var nameFormated: String {
-        name.replacingOccurrences(of: "-", with: " ")
+        name.replacingOccurrences(of: "-", with: " ").capitalized
     }
 }
 
