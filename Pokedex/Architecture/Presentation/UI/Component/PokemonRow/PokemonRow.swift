@@ -1,5 +1,5 @@
 //
-//  PokemonCard.swift
+//  PokemonRow.swift
 //  Pokedex
 //
 //  Created by Aitor Baragaño Fernández on 4/2/24.
@@ -7,25 +7,28 @@
 
 import SwiftUI
 
-enum CardContentPosition {
+enum RowContentPosition {
     case leading
     case trailing
 }
 
-struct PokemonCard: View {
+struct PokemonRow: View {
     
-    private let avatarSize: CGFloat = 90
-    private let rowSizeHeight: CGFloat = 64
-    private let imagePlaceholderOpacity: CGFloat = 0.5
+    @Binding var viewModel: PokemonRowViewModel
+    let contentPosition: RowContentPosition
+    let catchPokemon: (Int) -> Void
+    let showPokemonDetail: (Int) -> Void
+    
+    private let rowSizeHeight: CGFloat = 76
+    private let pokemonImageSize: CGFloat = 100
+    private let catchedPokeballImageSize: CGFloat = 60
     private let backgroundImageSize: CGFloat = 150
     private let leadingBackgroundImageXOffset: CGFloat = 35
     private let trailingBackgroundImageXOffset: CGFloat = -35
     private let backgroundImageYOffset: CGFloat = 15
     private let backgroundImageOpacity: CGFloat = 0.03
     
-    let viewModel: PokemonCardViewModel
-    let contentPosition: CardContentPosition
-    let onTap: () -> Void
+    @State private var isAnimatingPokeball = false
     
     var body: some View {
         ZStack {
@@ -35,7 +38,7 @@ struct PokemonCard: View {
         .frame(maxWidth: .infinity)
         .onTapGesture {
             HapticManager.triggerMediumImpact()
-            onTap()
+            showPokemonDetail(viewModel.number)
         }
     }
     
@@ -54,7 +57,7 @@ struct PokemonCard: View {
             if contentPosition == .leading {
                 Spacer()
             }
-            Image(Assets.images.pokeball)
+            Image(Assets.images.emptyPokeball)
                 .resizable()
                 .frame(width: backgroundImageSize, height: backgroundImageSize)
                 .offset(
@@ -69,7 +72,7 @@ struct PokemonCard: View {
     }
     
     var content: some View {
-        HStack(spacing: Theme.Spacing.space_2) {
+        HStack(spacing: Theme.Spacing.space_1) {
             switch contentPosition {
             case .leading:
                 number
@@ -84,31 +87,48 @@ struct PokemonCard: View {
             }
         }
         .frame(height: rowSizeHeight)
-        .padding(.horizontal, Theme.Spacing.space_2)
+        .padding(.horizontal, Theme.Spacing.space_1)
     }
     
     var number: some View {
         ZStack {
-            Circle()
-                .fill(Theme.Color.surfaceVariant)
-                .padding(.vertical, Theme.Spacing.space_1_5)
-            Text(viewModel.number)
+            Image(viewModel.isCatched ? Assets.images.pokeball : Assets.images.emptyPokeball)
+                .resizable()
+                .frame(width: catchedPokeballImageSize, height: catchedPokeballImageSize)
+            Text(viewModel.formatedNumber)
                 .font(Theme.Font.caption1)
-                .foregroundColor(Theme.Color.primary)
+                .foregroundColor(Theme.Color.background)
+                .padding(Theme.Spacing.space_0_5)
+                .background {
+                    Circle()
+                        .fill(Theme.Color.primary)
+                }
+        }
+        .rotationEffect(.degrees(isAnimatingPokeball ? (viewModel.isCatched ? 360 : -360) : 0))
+        .scaleEffect(isAnimatingPokeball ? (viewModel.isCatched ? 1.5 : 0.5) : 1)
+        .animation(Animation.linear, value: isAnimatingPokeball)
+        .onTapGesture {
+            withAnimation {
+                isAnimatingPokeball = true
+                catchPokemon(viewModel.number)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isAnimatingPokeball = false
+            }
         }
     }
     
     var picture: some View {
-        Image.cachedURL(URL(string: viewModel.imageURL))
+        Image.cachedURL(URL(string: viewModel.imageUrl))
             .placeholder {
-                Image(Assets.images.pokeball)
+                Image(Assets.images.unknownPokemon)
                     .resizable()
-                    .opacity(imagePlaceholderOpacity)
-                    .frame(width: avatarSize, height: avatarSize)
+                    .scaledToFit()
+                    .frame(width: pokemonImageSize, height: pokemonImageSize)
             }
             .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: avatarSize, height: avatarSize)
+            .scaledToFit()
+            .frame(width: pokemonImageSize, height: pokemonImageSize)
     }
     
     var name: some View {
@@ -124,25 +144,23 @@ struct PokemonCard_Previews: PreviewProvider {
             ZStack {
                 Theme.Color.surfaceContainerLow.ignoresSafeArea()
                 VStack(spacing: Theme.Spacing.space_3) {
-                    PokemonCard(
-                        viewModel: .init(
-                            number: "150",
-                            name: "Mewtwo",
-                            imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png"
-                        ),
+                    PokemonRow(
+                        viewModel: .constant(.mockCatched()),
                         contentPosition: .leading,
-                        onTap: {
+                        catchPokemon: { _ in
+                            // Intentionally empty
+                        },
+                        showPokemonDetail: { _ in
                             // Intentionally empty
                         }
                     )
-                    PokemonCard(
-                        viewModel: .init(
-                            number: "151",
-                            name: "Mew",
-                            imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png"
-                        ),
+                    PokemonRow(
+                        viewModel: .constant(.mockNotCatched()),
                         contentPosition: .trailing,
-                        onTap: {
+                        catchPokemon: { _ in
+                            // Intentionally empty
+                        },
+                        showPokemonDetail: { _ in
                             // Intentionally empty
                         }
                     )

@@ -31,14 +31,14 @@ struct PokedexSkeletonView: View {
         }
     }
     
-    func item(contentPosition: CardContentPosition) -> some View {
+    func item(contentPosition: RowContentPosition) -> some View {
         ZStack {
             background(contentPosition: contentPosition)
             content(contentPosition: contentPosition)
         }
     }
     
-    func background(contentPosition: CardContentPosition) -> some View {
+    func background(contentPosition: RowContentPosition) -> some View {
         Rectangle()
             .foregroundColor(Theme.Color.onPrimary)
             .overlay {
@@ -48,12 +48,12 @@ struct PokedexSkeletonView: View {
             .cornerRadius(Theme.Spacing.space_1)
     }
     
-    func backgroundImage(contentPosition: CardContentPosition) -> some View {
+    func backgroundImage(contentPosition: RowContentPosition) -> some View {
         HStack {
             if contentPosition == .leading {
                 Spacer()
             }
-            Image(Assets.images.pokeball)
+            Image(Assets.images.emptyPokeball)
                 .resizable()
                 .frame(width: backgroundImageSize, height: backgroundImageSize)
                 .offset(
@@ -67,7 +67,7 @@ struct PokedexSkeletonView: View {
         }
     }
     
-    func content(contentPosition: CardContentPosition) -> some View {
+    func content(contentPosition: RowContentPosition) -> some View {
         HStack(spacing: Theme.Spacing.space_2) {
             switch contentPosition {
             case .leading:

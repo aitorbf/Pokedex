@@ -5,7 +5,7 @@
 //  Created by Aitor Baragaño Fernández on 6/2/24.
 //
 
-import Foundation
+import UIKit
 
 protocol PokemonDetailRouter {
     func navigateBack()
@@ -13,9 +13,9 @@ protocol PokemonDetailRouter {
 
 final class PokemonDetailRouterDefault {
     
-    private weak var navigationController: NavigationController?
+    private weak var navigationController: UINavigationController?
     
-    init(navigationController: NavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 }

@@ -9,13 +9,14 @@ import Combine
 
 protocol PokedexPresenter: ObservableObject {
     var screenState: PokedexScreenState { get set }
-    var pokemonList: PokemonViewModel { get set }
+    var pokemonList: PokedexViewModel { get set }
     var selectedRegionIndex: Int { get set }
     var isLoading: Bool { get set }
     
-    func loadPokedex()
+    func loadPokedex(_ completion: (() -> Void)?)
     func reload()
-    func loadPokemonDetail(id: String)
+    func didCatchPokemon(number: Int)
+    func showPokemonDetail(number: Int)
 }
 
 enum PokedexScreenState {
@@ -28,31 +29,32 @@ enum PokedexScreenState {
 final class PokedexPresenterDefault {
     
     @Published var screenState: PokedexScreenState = .loading
-    @Published var pokemonList: PokemonViewModel = .empty()
-    @Published var selectedRegionIndex: Int = 0 {
-        didSet {
-            loadPokedex()
-        }
-    }
+    @Published var pokemonList: PokedexViewModel = .empty()
+    @Published var selectedRegionIndex: Int = 0
     @Published var isLoading: Bool = false
     
     private let getPokedexInteractor: GetPokedexInteractor
+    private let setPokemonCatchedInteractor: SetPokemonCatchedInteractor
     private let router: PokedexRouter
     
     private var cancellables = Set<AnyCancellable>()
     
     init(
         getPokedexInteractor: GetPokedexInteractor,
+        setPokemonCatchedInteractor: SetPokemonCatchedInteractor,
         router: PokedexRouter
     ) {
         self.getPokedexInteractor = getPokedexInteractor
+        self.setPokemonCatchedInteractor = setPokemonCatchedInteractor
         self.router = router
+        
+        loadPokedex()
     }
 }
 
-extension PokedexPresenterDefault: PokedexPresenter {
+extension PokedexPresenterDefault: PokedexPresenter, PokemonDetailDelegate {
     
-    func loadPokedex() {
+    func loadPokedex(_ completion: (() -> Void)? = nil) {
         if screenState == .content {
             isLoading = true
         }
@@ -67,8 +69,9 @@ extension PokedexPresenterDefault: PokedexPresenter {
                     }
                 },
                 receiveValue: { pokemonList in
-                    self.pokemonList = PokemonViewModelMapper.map(pokemonList)
-                    self.screenState = self.pokemonList.pokemon.isEmpty ? .empty : .content
+                    self.pokemonList = PokedexViewModelMapper.map(pokemonList)
+                    self.screenState = self.pokemonList.pokemonRows.isEmpty ? .empty : .content
+                    completion?()
                 }
             )
             .store(in: &cancellables)
@@ -79,7 +82,17 @@ extension PokedexPresenterDefault: PokedexPresenter {
         loadPokedex()
     }
     
-    func loadPokemonDetail(id: String) {
-        router.navigateToPokemonDetail(id: id)
+    func didCatchPokemon(number: Int) {
+        if let index = pokemonList.pokemonRows.firstIndex(where: { $0.number == number }) {
+            pokemonList.pokemonRows[index].isCatched.toggle()
+            setPokemonCatchedInteractor.execute(
+                pokemonList.pokemonRows[index].isCatched,
+                number: pokemonList.pokemonRows[index].number
+            )
+        }
+    }
+    
+    func showPokemonDetail(number: Int) {
+        router.navigateToPokemonDetail(number: number, delegate: self)
     }
 }

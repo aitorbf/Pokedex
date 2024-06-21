@@ -9,13 +9,13 @@ import SwiftUI
 
 struct PokedexConfigurator {
     
-    private let navigationController: NavigationController
+    private let navigationController: UINavigationController
     
     private var injector: Injector {
         PokedexInjectorProvider.shared.injector
     }
     
-    init(navigationController: NavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
@@ -25,8 +25,10 @@ struct PokedexConfigurator {
         
         // Presenter
         let getPokedexInteractor = injector.instanceOf(GetPokedexInteractor.self)
+        let setPokemonCatchedInteractor = injector.instanceOf(SetPokemonCatchedInteractor.self)
         let presenter = PokedexPresenterDefault(
             getPokedexInteractor: getPokedexInteractor,
+            setPokemonCatchedInteractor: setPokemonCatchedInteractor,
             router: router
         )
         

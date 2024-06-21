@@ -71,7 +71,7 @@ struct PokemonDetailSkeletonView: View {
     }
     
     var backgroundImage: some View {
-        Image(Assets.images.pokeball)
+        Image(Assets.images.emptyPokeball)
             .resizable()
             .renderingMode(.template)
             .foregroundColor(Theme.Color.onPrimary)

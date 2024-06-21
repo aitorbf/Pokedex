@@ -12,10 +12,12 @@ struct PokemonDetail: Model {
     let number: Int
     let name: String
     let imageUrl: String
+    let animatedImageUrl: String
     let types: [PokemonType]
     let height: Float
     let weight: Float
     let stats: [PokemonStat]
+    var isCatched: Bool
 }
 
 extension PokemonDetail: Equatable {
@@ -39,10 +41,12 @@ extension PokemonDetail {
             number: 0,
             name: "",
             imageUrl: "",
+            animatedImageUrl: "",
             types: [],
             height: 0,
             weight: 0,
-            stats: []
+            stats: [],
+            isCatched: false
         )
     }
     
@@ -51,7 +55,8 @@ extension PokemonDetail {
             number: 150,
             name: "mewtwo",
             imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
-            types: [.init(name: .psychic, url: "https://pokeapi.co/api/v2/type/14/")],
+            animatedImageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/150.gif",
+            types: [.init(name: .psychic)],
             height: 20,
             weight: 1220,
             stats: [
@@ -61,7 +66,8 @@ extension PokemonDetail {
                 .init(name: "special-attack", value: 154),
                 .init(name: "special-defense", value: 90),
                 .init(name: "speed", value: 130)
-            ]
+            ],
+            isCatched: true
         )
     }
 }

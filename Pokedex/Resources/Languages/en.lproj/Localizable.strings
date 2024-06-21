@@ -16,7 +16,7 @@
 "pokemon_detail_weight" = "Weight";
 "pokemon_detail_height" = "Height";
 
-"pokemon_type_none" = "none";
+"pokemon_type_unknown" = "???";
 "pokemon_type_normal" = "normal";
 "pokemon_type_grass" = "grass";
 "pokemon_type_poison" = "poison";
@@ -34,3 +34,5 @@
 "pokemon_type_fighting" = "fighting";
 "pokemon_type_dragon" = "dragon";
 "pokemon_type_ghost" = "ghost";
+"pokemon_type_dark" = "dark";
+"pokemon_type_stellar" = "stellar";

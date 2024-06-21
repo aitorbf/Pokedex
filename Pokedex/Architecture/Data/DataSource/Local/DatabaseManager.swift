@@ -20,7 +20,7 @@ final class DatabaseManagerDefault: DatabaseManager {
     }
     
     private func initContainer() {
-        container = NSPersistentContainer(name: "PokedexDatabase")
+        container = NSPersistentContainer(name: "Pokedex")
         container?.loadPersistentStores { _, error in
             if error != nil {
                 self.container = nil

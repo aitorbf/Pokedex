@@ -8,7 +8,7 @@
 import Combine
 
 protocol GetPokemonDetailInteractor {
-    func execute(id: String) -> AnyPublisher<PokemonDetail, GetPokemonDetailError>
+    func execute(number: Int) -> AnyPublisher<PokemonDetail, GetPokemonDetailError>
 }
 
 final class GetPokemonDetailInteractorDefault {
@@ -22,8 +22,8 @@ final class GetPokemonDetailInteractorDefault {
 
 extension GetPokemonDetailInteractorDefault: GetPokemonDetailInteractor {
     
-    func execute(id: String) -> AnyPublisher<PokemonDetail, GetPokemonDetailError> {
-        repository.getPokemonDetail(id: id)
+    func execute(number: Int) -> AnyPublisher<PokemonDetail, GetPokemonDetailError> {
+        repository.getPokemonDetail(number: number)
             .map { PokemonDetailMapper.map($0) }
             .mapError { GetPokemonDetailErrorMapper.map($0) }
             .eraseToAnyPublisher()

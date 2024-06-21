@@ -11,8 +11,4 @@ struct PokemonStat: Model {
     
     let name: String
     let value: Int
-    
-    var nameFormated: String {
-        name.replacingOccurrences(of: "-", with: " ")
-    }
 }

@@ -10,15 +10,10 @@ import Foundation
 struct PokemonType: Model {
     
     let name: PokemonTypeName
-    let url: String
-    
-    var id: String {
-        url.components(separatedBy: "/")[6]
-    }
 }
 
 enum PokemonTypeName: String, CaseIterable {
-    case none
+    case unknown
     case normal
     case grass
     case poison
@@ -36,11 +31,13 @@ enum PokemonTypeName: String, CaseIterable {
     case fighting
     case dragon
     case ghost
+    case dark
+    case stellar
     
     func localized() -> String {
         switch self {
-        case .none:
-            Strings.pokemonTypeNone
+        case .unknown:
+            Strings.pokemonTypeUnknown
         case .normal:
             Strings.pokemonTypeNormal
         case .grass:
@@ -75,6 +72,10 @@ enum PokemonTypeName: String, CaseIterable {
             Strings.pokemonTypeDragon
         case .ghost:
             Strings.pokemonTypeGhost
+        case .dark:
+            Strings.pokemonTypeDark
+        case .stellar:
+            Strings.pokemonTypeStellar
         }
     }
 }

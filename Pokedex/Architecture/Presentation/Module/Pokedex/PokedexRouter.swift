@@ -5,28 +5,28 @@
 //  Created by Aitor Baragaño Fernández on 4/2/24.
 //
 
-import Foundation
+import UIKit
 
 protocol PokedexRouter {
-    func navigateToPokemonDetail(id: String)
+    func navigateToPokemonDetail(number: Int, delegate: PokemonDetailDelegate)
 }
 
 final class PokedexRouterDefault {
     
-    private weak var navigationController: NavigationController?
+    private weak var navigationController: UINavigationController?
     
-    init(navigationController: NavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 }
 
 extension PokedexRouterDefault: PokedexRouter {
     
-    func navigateToPokemonDetail(id: String) {
+    func navigateToPokemonDetail(number: Int, delegate: PokemonDetailDelegate) {
         guard let navigationController else {
             return
         }
-        let viewController = PokemonDetailConfigurator(navigationController: navigationController).viewController(pokemonNumber: id)
+        let viewController = PokemonDetailConfigurator(navigationController: navigationController).viewController(pokemonNumber: number, delegate: delegate)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

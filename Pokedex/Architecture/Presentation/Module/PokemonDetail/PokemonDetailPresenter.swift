@@ -7,12 +7,17 @@
 
 import Combine
 
+protocol PokemonDetailDelegate: AnyObject {
+    func didCatchPokemon(number: Int)
+}
+
 protocol PokemonDetailPresenter: ObservableObject {
     var screenState: PokemonDetailScreenState { get set }
     var pokemonDetail: PokemonDetailViewModel { get set }
     
     func loadPokemonDetail()
     func reload()
+    func didCatchPokemon()
     func goBack()
 }
 
@@ -28,14 +33,16 @@ final class PokemonDetailPresenterDefault {
     @Published var screenState: PokemonDetailScreenState = .loading
     @Published var pokemonDetail: PokemonDetailViewModel = .empty()
     
-    private let pokemonNumber: String
+    weak var delegate: PokemonDetailDelegate?
+    
+    private let pokemonNumber: Int
     private let getPokemonDetailInteractor: GetPokemonDetailInteractor
     private let router: PokemonDetailRouter
     
     private var cancellables = Set<AnyCancellable>()
     
     init(
-        pokemonNumber: String,
+        pokemonNumber: Int,
         getPokemonDetailInteractor: GetPokemonDetailInteractor,
         router: PokemonDetailRouter
     ) {
@@ -48,7 +55,7 @@ final class PokemonDetailPresenterDefault {
 extension PokemonDetailPresenterDefault: PokemonDetailPresenter {
     
     func loadPokemonDetail() {
-        getPokemonDetailInteractor.execute(id: pokemonNumber)
+        getPokemonDetailInteractor.execute(number: pokemonNumber)
             .sink(
                 receiveCompletion: { completion in
                     switch completion {
@@ -60,7 +67,7 @@ extension PokemonDetailPresenterDefault: PokemonDetailPresenter {
                 },
                 receiveValue: { pokemonDetail in
                     self.pokemonDetail = PokemonDetailViewModelMapper.map(pokemonDetail)
-                    self.screenState = self.pokemonDetail.pokemon == .empty() ? .empty : .content
+                    self.screenState = self.pokemonDetail == .empty() ? .empty : .content
                 }
             )
             .store(in: &cancellables)
@@ -69,6 +76,11 @@ extension PokemonDetailPresenterDefault: PokemonDetailPresenter {
     func reload() {
         screenState = .loading
         loadPokemonDetail()
+    }
+    
+    func didCatchPokemon() {
+        pokemonDetail.isCatched.toggle()
+        delegate?.didCatchPokemon(number: pokemonNumber)
     }
     
     func goBack() {

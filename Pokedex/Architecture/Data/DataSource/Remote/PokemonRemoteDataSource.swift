@@ -10,7 +10,7 @@ import Combine
 
 protocol PokemonRemoteDataSource {
     func getPokedex(region: PokemonRegion) -> AnyPublisher<PokedexEntity, DataError>
-    func getPokemonDetail(id: String) -> AnyPublisher<PokemonDetailEntity, DataError>
+    func getPokemonDetail(number: Int) -> AnyPublisher<PokemonDetailEntity, DataError>
 }
 
 final class PokemonRemoteDataSourceDefault: PokemonRemoteDataSource {
@@ -24,8 +24,8 @@ final class PokemonRemoteDataSourceDefault: PokemonRemoteDataSource {
         return RemoteDataSource.run(request)
     }
     
-    func getPokemonDetail(id: String) -> AnyPublisher<PokemonDetailEntity, DataError> {
-        guard let request = API.Pokemon.PokeAPI.detail(id: id).urlRequest else {
+    func getPokemonDetail(number: Int) -> AnyPublisher<PokemonDetailEntity, DataError> {
+        guard let request = API.Pokemon.PokeAPI.detail(number: number).urlRequest else {
             return Fail(error: DataError.invalidUrl)
                 .eraseToAnyPublisher()
         }

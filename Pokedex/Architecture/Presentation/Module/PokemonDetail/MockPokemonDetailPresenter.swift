@@ -24,6 +24,10 @@ final class MockPokemonDetailPresenter: PokemonDetailPresenter {
         // Intentionally empty
     }
     
+    func didCatchPokemon() {
+        // Intentionally empty
+    }
+    
     func goBack() {
         // Intentionally empty
     }

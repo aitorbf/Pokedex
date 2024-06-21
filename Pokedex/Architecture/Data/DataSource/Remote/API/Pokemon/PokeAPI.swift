@@ -12,7 +12,7 @@ extension API.Pokemon {
     enum PokeAPI: URLRequestConvertible {
         
         case list(request: GetPokedexRequest)
-        case detail(id: String)
+        case detail(number: Int)
         
         var method: HttpConstants.Method {
             switch self {
@@ -25,8 +25,8 @@ extension API.Pokemon {
             switch self {
             case .list(let request):
                 return URL(string: HttpConstants.apiBaseURL + "v2/pokedex/\(request.pokedexNumber)")
-            case .detail(let id):
-                return URL(string: HttpConstants.apiBaseURL + "v2/pokemon/\(id)/")
+            case .detail(let number):
+                return URL(string: HttpConstants.apiBaseURL + "v2/pokemon/\(number)")
             }
         }
         

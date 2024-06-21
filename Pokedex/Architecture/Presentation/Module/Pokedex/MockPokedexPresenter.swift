@@ -10,15 +10,15 @@ import Foundation
 final class MockPokedexPresenter: PokedexPresenter {
     
     var screenState: PokedexScreenState = .content
-    var pokemonList: PokemonViewModel = .empty()
+    var pokemonList: PokedexViewModel = .empty()
     var selectedRegionIndex: Int = 0
     var isLoading: Bool = false
     
     init(pokemonList: [Pokemon]) {
-        self.pokemonList = PokemonViewModelMapper.map(pokemonList)
+        self.pokemonList = PokedexViewModelMapper.map(pokemonList)
     }
     
-    func loadPokedex() {
+    func loadPokedex(_ completion: (() -> Void)? = nil) {
         // Intentionally empty
     }
     
@@ -26,7 +26,11 @@ final class MockPokedexPresenter: PokedexPresenter {
         // Intentionally empty
     }
     
-    func loadPokemonDetail(id: String) {
+    func didCatchPokemon(number: Int) {
+        // Intentionally empty
+    }
+    
+    func showPokemonDetail(number: Int) {
         // Intentionally empty
     }
 }

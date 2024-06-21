@@ -19,23 +19,24 @@ struct PokedexContentView<Presenter: PokedexPresenter>: View {
             ScrollView(showsIndicators: false) {
                 ScrollViewReader { proxy in
                     LazyVStack(spacing: Theme.Spacing.space_3) {
-                        ForEach(Array(presenter.pokemonList.pokemon.enumerated()), id: \.element.number) { index, pokemonCardViewModel in
-                            PokemonCard(
-                                viewModel: pokemonCardViewModel,
+                        ForEach(Array(presenter.pokemonList.pokemonRows.enumerated()), id: \.element.number) { index, _ in
+                            PokemonRow(
+                                viewModel: $presenter.pokemonList.pokemonRows[index],
                                 contentPosition: index % 2 == 0 ? .leading : .trailing,
-                                onTap: {
-                                    presenter.loadPokemonDetail(id: pokemonCardViewModel.number)
-                                }
+                                catchPokemon: presenter.didCatchPokemon,
+                                showPokemonDetail: presenter.showPokemonDetail
                             )
                             .id(index)
                         }
                     }
                     .id(contentID)
                     .padding(Theme.Spacing.space_2)
-                    .onChange(of: presenter.pokemonList.pokemon) { _ in
-                        withAnimation {
-                            contentID = UUID()
-                            proxy.scrollTo(0, anchor: .top)
+                    .onChange(of: presenter.selectedRegionIndex) { _ in
+                        presenter.loadPokedex {
+                            withAnimation {
+                                contentID = UUID()
+                                proxy.scrollTo(0, anchor: .top)
+                            }
                         }
                     }
                 }

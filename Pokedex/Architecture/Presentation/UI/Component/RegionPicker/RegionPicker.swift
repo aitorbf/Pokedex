@@ -27,7 +27,7 @@ struct RegionPicker: View {
     func regionButton(value: String, index: Int) -> some View {
         ZStack {
             Capsule()
-                .foregroundColor(Theme.Color.red.opacity(selectedOptionIndex == index ? 1 : minBackgroundOpacity))
+                .foregroundColor(Theme.Color.pokemonRed.opacity(selectedOptionIndex == index ? 1 : minBackgroundOpacity))
                 .overlay(
                     Capsule()
                         .stroke(selectedOptionIndex == index ? Theme.Color.onPrimary : Theme.Color.primary, lineWidth: 1)
@@ -42,18 +42,6 @@ struct RegionPicker: View {
         .onTapGesture {
             selectedOptionIndex = index
         }
-//        Text(value)
-//            .padding(.horizontal, Theme.Spacing.space_2)
-//            .padding(.vertical, Theme.Spacing.space_1_5)
-//            .font(Theme.Font.button)
-//            .foregroundColor(selectedOptionIndex == index ? Theme.Color.onPrimary : Theme.Color.primary)
-//            .background(Theme.Color.red.opacity(selectedOptionIndex == index ? 1 : minBackgroundOpacity))
-//            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.small))
-//            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.small)
-//                .strokeBorder(selectedOptionIndex == index ? Theme.Color.onPrimary : Theme.Color.primary, lineWidth: 1))
-//            .onTapGesture {
-//                selectedOptionIndex = index
-//            }
     }
 }
 

@@ -10,7 +10,7 @@ import Foundation
 struct PokemonEntryEntity: Entity {
     
     let number: Int?
-    let pokemon: PokemonEntity?
+    var pokemon: PokemonEntity?
 }
 
 extension PokemonEntryEntity {

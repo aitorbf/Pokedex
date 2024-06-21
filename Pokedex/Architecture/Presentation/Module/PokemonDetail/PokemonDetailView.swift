@@ -28,7 +28,7 @@ struct PokemonDetailView<Presenter: PokemonDetailPresenter>: View {
             }
             SwipeBackGestureRecognizer(onFire: presenter.goBack)
         }
-        .toolbar(.backButton, title: "#\(presenter.pokemonDetail.pokemon.numberFormated) \(presenter.pokemonDetail.pokemon.name.firstUppercased)") { _ in
+        .toolbar(.backButton, title: "#\(presenter.pokemonDetail.formatedNumber) \(presenter.pokemonDetail.name.firstUppercased)") { _ in
             presenter.goBack()
         }
         .onAppear {

@@ -11,26 +11,26 @@ struct PokemonDetailViewModelMapper {
     
     static func map(_ pokemonDetail: PokemonDetail) -> PokemonDetailViewModel {
         .init(
-            pokemon: .init(
-                number: pokemonDetail.number,
-                name: pokemonDetail.name,
-                imageURL: pokemonDetail.imageUrl,
-                types: mapTypes(pokemonDetail.types),
-                height: pokemonDetail.height,
-                weight: pokemonDetail.weight,
-                stats: mapStats(pokemonDetail.stats)
-            )
+            number: pokemonDetail.number,
+            name: pokemonDetail.name,
+            imageUrl: pokemonDetail.imageUrl,
+            animatedImageUrl: pokemonDetail.animatedImageUrl,
+            types: mapTypes(pokemonDetail.types),
+            height: pokemonDetail.height,
+            weight: pokemonDetail.weight,
+            stats: mapStats(pokemonDetail.stats),
+            isCatched: pokemonDetail.isCatched
         )
     }
 }
 
 private extension PokemonDetailViewModelMapper {
     
-    static func mapTypes(_ pokemonTypes: [PokemonType]) -> [PokemonTypeDetailCardViewModel] {
-        pokemonTypes.map { PokemonTypeDetailCardViewModel(name: $0.name, url: $0.url) }
+    static func mapTypes(_ pokemonTypes: [PokemonType]) -> [PokemonTypeViewModel] {
+        pokemonTypes.map { PokemonTypeViewModel(name: $0.name) }
     }
     
-    static func mapStats(_ pokemonStats: [PokemonStat]) -> [PokemonStatDetailCardViewModel] {
-        pokemonStats.map { PokemonStatDetailCardViewModel(name: $0.name, value: $0.value) }
+    static func mapStats(_ pokemonStats: [PokemonStat]) -> [PokemonStatViewModel] {
+        pokemonStats.map { PokemonStatViewModel(name: $0.name, value: $0.value) }
     }
 }

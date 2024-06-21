@@ -25,7 +25,7 @@ struct PokemonDetailErrorView: View {
     
     var icon: some View {
         ZStack {
-            Image(Assets.images.pokeball)
+            Image(Assets.images.emptyPokeball)
                 .resizable()
                 .renderingMode(.template)
                 .foregroundColor(Theme.Color.onPrimary)

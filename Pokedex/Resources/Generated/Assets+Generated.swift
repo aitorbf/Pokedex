@@ -13,9 +13,11 @@ internal enum Assets {
     internal static let warningIcon: String = "warningIcon"
   }
   internal enum images {
+    internal static let emptyPokeball: String = "emptyPokeball"
     internal static let pokeball: String = "pokeball"
     internal static let pokedex: String = "pokedex"
     internal static let pokemonShadow: String = "pokemonShadow"
+    internal static let unknownPokemon: String = "unknownPokemon"
   }
   internal enum pokemonTypes {
     internal static let bug: String = "bug"

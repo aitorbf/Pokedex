@@ -9,17 +9,20 @@ import SwiftUI
 
 struct PokemonDetailConfigurator {
 
-    private let navigationController: NavigationController
+    private let navigationController: UINavigationController
     
     private var injector: Injector {
         PokedexInjectorProvider.shared.injector
     }
 
-    init(navigationController: NavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
-    func viewController(pokemonNumber: String) -> UIViewController {
+    func viewController(
+        pokemonNumber: Int,
+        delegate: PokemonDetailDelegate
+    ) -> UIViewController {
         // Router
         let router = PokemonDetailRouterDefault(navigationController: navigationController)
         
@@ -30,6 +33,7 @@ struct PokemonDetailConfigurator {
             getPokemonDetailInteractor: getPokemonDetailInteractor,
             router: router
         )
+        presenter.delegate = delegate
         
         // View
         let view: some View = PokemonDetailView<PokemonDetailPresenterDefault>().environmentObject(presenter)

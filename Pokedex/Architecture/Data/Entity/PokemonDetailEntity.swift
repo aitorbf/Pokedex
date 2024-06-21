@@ -16,6 +16,7 @@ struct PokemonDetailEntity: Entity {
     let height: Float?
     let weight: Float?
     let stats: [PokemonStatsEntity]
+    var isCatched: Bool?
 }
 
 struct Sprites: Entity {
@@ -26,15 +27,26 @@ struct Sprites: Entity {
 struct Other: Entity {
     
     let artwork: Artwork
+    let showdown: Showdown
     
     enum CodingKeys: String, CodingKey {
         case artwork = "official-artwork"
+        case showdown
     }
 }
 
 struct Artwork: Entity {
     
-    let frontDefault: String
+    let frontDefault: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+}
+
+struct Showdown: Entity {
+    
+    let frontDefault: String?
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
@@ -43,11 +55,11 @@ struct Artwork: Entity {
 
 struct PokemonTypesEntity: Entity, Hashable {
     
+    let type: PokemonTypeEntity
+    
     static func == (lhs: PokemonTypesEntity, rhs: PokemonTypesEntity) -> Bool {
         return lhs.type.name == rhs.type.name
     }
-    
-    let type: PokemonTypeEntity
 }
 
 struct PokemonTypeEntity: Entity, Hashable {
@@ -75,6 +87,8 @@ enum PokemonTypeNameEntity: String, Entity {
     case fighting
     case dragon
     case ghost
+    case dark
+    case stellar
 }
 
 struct PokemonStatsEntity: Entity {

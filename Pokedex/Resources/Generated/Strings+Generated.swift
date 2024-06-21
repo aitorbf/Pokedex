@@ -27,6 +27,8 @@ internal enum Strings {
   internal static let pokemonDetailWeight = Strings.tr("Localizable", "pokemon_detail_weight", fallback: "Weight")
   /// bug
   internal static let pokemonTypeBug = Strings.tr("Localizable", "pokemon_type_bug", fallback: "bug")
+  /// dark
+  internal static let pokemonTypeDark = Strings.tr("Localizable", "pokemon_type_dark", fallback: "dark")
   /// dragon
   internal static let pokemonTypeDragon = Strings.tr("Localizable", "pokemon_type_dragon", fallback: "dragon")
   /// electric
@@ -47,8 +49,6 @@ internal enum Strings {
   internal static let pokemonTypeGround = Strings.tr("Localizable", "pokemon_type_ground", fallback: "ground")
   /// ice
   internal static let pokemonTypeIce = Strings.tr("Localizable", "pokemon_type_ice", fallback: "ice")
-  /// none
-  internal static let pokemonTypeNone = Strings.tr("Localizable", "pokemon_type_none", fallback: "none")
   /// normal
   internal static let pokemonTypeNormal = Strings.tr("Localizable", "pokemon_type_normal", fallback: "normal")
   /// poison
@@ -59,6 +59,10 @@ internal enum Strings {
   internal static let pokemonTypeRock = Strings.tr("Localizable", "pokemon_type_rock", fallback: "rock")
   /// steel
   internal static let pokemonTypeSteel = Strings.tr("Localizable", "pokemon_type_steel", fallback: "steel")
+  /// stellar
+  internal static let pokemonTypeStellar = Strings.tr("Localizable", "pokemon_type_stellar", fallback: "stellar")
+  /// ???
+  internal static let pokemonTypeUnknown = Strings.tr("Localizable", "pokemon_type_unknown", fallback: "???")
   /// water
   internal static let pokemonTypeWater = Strings.tr("Localizable", "pokemon_type_water", fallback: "water")
 }

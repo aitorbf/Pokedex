@@ -15,7 +15,7 @@ struct PokemonTypeBadge: View {
         ZStack {
             Capsule()
                 .foregroundColor(viewModel.backgroundColor)
-            Text(viewModel.typeNameFormated)
+            Text(viewModel.formatedTypeName)
                 .font(Theme.Font.caption2)
                 .foregroundColor(Theme.Color.onPrimary)
                 .padding(.horizontal, Theme.Spacing.space_1)
