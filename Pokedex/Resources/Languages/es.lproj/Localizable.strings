@@ -6,6 +6,7 @@
   
 */
 
+"pokedex_search_placeholder" = "Buscar...";
 "pokedex_empty" = "No hay Pokémon en la Pokédex";
 "pokedex_error" = "No hemos podido cargar la Pokédex. Inténtalo de nuevo por favor";
 "pokedex_retry" = "Reintentar";

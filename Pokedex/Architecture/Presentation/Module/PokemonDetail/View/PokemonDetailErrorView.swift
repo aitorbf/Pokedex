@@ -30,7 +30,7 @@ struct PokemonDetailErrorView: View {
                 .renderingMode(.template)
                 .foregroundColor(Theme.Color.onPrimary)
                 .frame(width: iconCircleSize, height: iconCircleSize)
-            Image(Assets.icon.exclamation)
+            Image(Assets.icon.exclamationIcon)
                 .resizable()
                 .renderingMode(.template)
                 .foregroundColor(Theme.Color.error)

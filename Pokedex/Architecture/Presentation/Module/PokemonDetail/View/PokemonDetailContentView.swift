@@ -6,13 +6,6 @@
 //
 
 import SwiftUI
-import DDSpiderChart
-
-extension AnyTransition {
-    static var scaleAndFade: AnyTransition {
-        AnyTransition.scale(scale: 0).combined(with: .opacity)
-    }
-}
 
 struct PokemonDetailContentView<Presenter: PokemonDetailPresenter>: View {
     
@@ -20,12 +13,9 @@ struct PokemonDetailContentView<Presenter: PokemonDetailPresenter>: View {
     
     private let pokemonImageSize: CGFloat = 250
     private let catchedPokeballImageSize: CGFloat = 50
-    private let pokemonStatsChartWidth: CGFloat = 350
-    private let pokemonStatsChartHeight: CGFloat = 300
     private let backgroundImageSize: CGFloat = 400
     private let backgroundImageOpacity: CGFloat = 0.6
     private let backgroundOpacity: CGFloat = 0.7
-    private let maxStatValue: Int = 255
     
     @State private var isAnimatingPokeball = false
     @State private var showAnimatedPokemon = false
@@ -100,9 +90,12 @@ struct PokemonDetailContentView<Presenter: PokemonDetailPresenter>: View {
         VStack(spacing: Theme.Spacing.space_3) {
             pokemonTypes
             pokemonSize
-            pokemonStats
+            PokemonStats(
+                stats: presenter.pokemonDetail.stats,
+                color: presenter.pokemonDetail.backgroundColor
+            )
         }
-        .padding(.top, showAnimatedPokemon ? Theme.Spacing.space_6 : Theme.Spacing.space_4)
+        .padding(.top, showAnimatedPokemon && !presenter.pokemonDetail.animatedImageUrl.isEmpty ? Theme.Spacing.space_6 : Theme.Spacing.space_4)
         .padding(.bottom, Theme.Spacing.space_4)
         .background(
             Rectangle()
@@ -155,22 +148,6 @@ struct PokemonDetailContentView<Presenter: PokemonDetailPresenter>: View {
             }
             Spacer()
         }
-    }
-    
-    var pokemonStats: some View {
-        DDSpiderChart(
-            axes: presenter.pokemonDetail.stats.map({ $0.abbreviatedName }),
-            values: [
-                DDSpiderChartEntries(
-                    values: presenter.pokemonDetail.stats.map({ Float($0.value) / Float(maxStatValue) }),
-                    color: presenter.pokemonDetail.backgroundColor
-                )
-            ],
-            color: Theme.Color.neutral70,
-            fontTitle: .systemFont(ofSize: 16),
-            textColor: Theme.Color.primary
-        )
-        .frame(width: pokemonStatsChartWidth, height: pokemonStatsChartHeight)
     }
 }
 

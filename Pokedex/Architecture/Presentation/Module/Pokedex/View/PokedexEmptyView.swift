@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct PokedexEmptyView: View {
+struct PokedexEmptyView<Presenter: PokedexPresenter>: View {
+    
+    @EnvironmentObject var presenter: Presenter
     
     private let iconSize: CGFloat = 32
     private let iconCircleSize: CGFloat = 128
@@ -15,9 +17,17 @@ struct PokedexEmptyView: View {
     
     var body: some View {
         VStack(spacing: Theme.Spacing.space_4) {
+            Spacer()
             icon
             explanation
+            Spacer()
         }
+        .onChange(of: presenter.selectedRegionIndex) { _ in
+            presenter.loadPokedex {
+                // Intentionally empty
+            }
+        }
+        .loading(isShown: $presenter.isLoading)
     }
     
     var icon: some View {
@@ -46,10 +56,13 @@ struct PokedexEmptyView: View {
 
 struct PokedexEmptyView_Previews: PreviewProvider {
     static var previews: some View {
+        let pokemonList = [Pokemon.mock()]
+        let presenter: MockPokedexPresenter = MockPokedexPresenter(pokemonList: pokemonList)
         DevicesPreview {
             ZStack {
                 Theme.Color.surfaceContainerLow.ignoresSafeArea()
-                PokedexEmptyView()
+                PokedexEmptyView<MockPokedexPresenter>()
+                    .environmentObject(presenter)
             }
         }
     }

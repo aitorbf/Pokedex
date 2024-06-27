@@ -14,20 +14,33 @@ struct PokedexView<Presenter: PokedexPresenter>: View {
     var body: some View {
         ZStack {
             Theme.Color.surfaceContainerLow.ignoresSafeArea()
-            switch presenter.screenState {
-            case .loading:
-                PokedexSkeletonView()
-            case .error:
-                PokedexErrorView {
-                    presenter.reload()
-                }            
-            case .empty:
-                PokedexEmptyView()
-            case .content:
-                PokedexContentView<Presenter>()
+            VStack(spacing: Theme.Spacing.space_2) {
+                RegionPicker(selectedOptionIndex: $presenter.selectedRegionIndex)
+                searchBar
+                switch presenter.screenState {
+                case .loading:
+                    PokedexSkeletonView()
+                case .error:
+                    PokedexErrorView<Presenter> {
+                        presenter.reload()
+                    }
+                case .empty:
+                    PokedexEmptyView<Presenter>()
+                case .content:
+                    PokedexContentView<Presenter>()
+                }
             }
+            .padding(.top, Theme.Spacing.space_2)
         }
         .toolbar(.logo)
+    }
+    
+    var searchBar: some View {
+        SearchBar(
+            placeholder: Strings.pokedexSearchPlaceholder,
+            text: $presenter.searchValue
+        )
+        .padding(.horizontal, Theme.Spacing.space_1)
     }
 }
 

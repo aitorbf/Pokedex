@@ -18,7 +18,7 @@ struct NavigationToolbar: ViewModifier {
         NavigationView {
             content
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .topBarLeading) {
                         builder.iconButton(
                             buttonImage: Image(systemName: Assets.System.chevronLeft),
                             buttonAction: .goBack,

@@ -51,7 +51,7 @@ struct FilledButtonStyle: ButtonStyle {
             .font(Theme.Font.button)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: Theme.Button.radius))
+            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.small))
         }
     }
 

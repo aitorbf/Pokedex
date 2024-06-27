@@ -6,15 +6,17 @@ import Foundation
 // MARK: - Strings
 
 internal enum Strings {
-  /// Localizable.strings
-  ///   Pokedex
-  /// 
-  ///   Created by Aitor Baragaño Fernández on 4/2/24.
+  /// There are no Pokémon in the Pokédex
   internal static let pokedexEmpty = Strings.tr("Localizable", "pokedex_empty", fallback: "There are no Pokémon in the Pokédex")
   /// Unable to load the Pokédex, please try again
   internal static let pokedexError = Strings.tr("Localizable", "pokedex_error", fallback: "Unable to load the Pokédex, please try again")
   /// Retry
   internal static let pokedexRetry = Strings.tr("Localizable", "pokedex_retry", fallback: "Retry")
+  /// Localizable.strings
+  ///   Pokedex
+  /// 
+  ///   Created by Aitor Baragaño Fernández on 4/2/24.
+  internal static let pokedexSearchPlaceholder = Strings.tr("Localizable", "pokedex_search_placeholder", fallback: "Search...")
   /// Pokémon not found
   internal static let pokemonDetailEmpty = Strings.tr("Localizable", "pokemon_detail_empty", fallback: "Pokémon not found")
   /// Unable to load the Pokémon, please try again

@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct PokemonRowViewModel: Equatable {
+struct PokemonRowViewModel: Identifiable, Equatable {
     
+    var id: Int { number }
     let number: Int
     let name: String
     let imageUrl: String

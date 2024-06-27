@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct PokedexErrorView: View {
+struct PokedexErrorView<Presenter: PokedexPresenter>: View {
     
+    @EnvironmentObject var presenter: Presenter
     var retry: () -> Void
     
     private let iconSize: CGFloat = 32
@@ -17,9 +18,16 @@ struct PokedexErrorView: View {
     
     var body: some View {
         VStack(spacing: Theme.Spacing.space_2) {
+            Spacer()
             icon
             explanation
             button
+            Spacer()
+        }
+        .onChange(of: presenter.selectedRegionIndex) { _ in
+            presenter.loadPokedex {
+                // Intentionally empty
+            }
         }
     }
     
@@ -30,7 +38,7 @@ struct PokedexErrorView: View {
                 .renderingMode(.template)
                 .foregroundColor(Theme.Color.onPrimary)
                 .frame(width: iconCircleSize, height: iconCircleSize)
-            Image(Assets.icon.exclamation)
+            Image(Assets.icon.exclamationIcon)
                 .resizable()
                 .renderingMode(.template)
                 .foregroundColor(Theme.Color.error)
@@ -59,10 +67,13 @@ struct PokedexErrorView: View {
 
 struct PokedexErrorView_Previews: PreviewProvider {
     static var previews: some View {
+        let pokemonList = [Pokemon.mock()]
+        let presenter: MockPokedexPresenter = MockPokedexPresenter(pokemonList: pokemonList)
         DevicesPreview {
             ZStack {
                 Theme.Color.surfaceContainerLow.ignoresSafeArea()
-                PokedexErrorView() { }
+                PokedexErrorView<MockPokedexPresenter>() { }
+                    .environmentObject(presenter)
             }
         }
     }

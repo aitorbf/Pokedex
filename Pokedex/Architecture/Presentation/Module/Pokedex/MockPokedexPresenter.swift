@@ -13,6 +13,7 @@ final class MockPokedexPresenter: PokedexPresenter {
     var pokemonList: PokedexViewModel = .empty()
     var selectedRegionIndex: Int = 0
     var isLoading: Bool = false
+    var searchValue: String = ""
     
     init(pokemonList: [Pokemon]) {
         self.pokemonList = PokedexViewModelMapper.map(pokemonList)

@@ -1,5 +1,5 @@
 //
-//  Radius.swift
+//  Theme+Radius.swift
 //  Pokedex
 //
 //  Created by Aitor Baragaño Fernández on 4/2/24.

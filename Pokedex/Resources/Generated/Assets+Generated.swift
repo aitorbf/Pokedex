@@ -9,7 +9,8 @@ import UIKit
 internal enum Assets {
   internal static var accentColor = Color("AccentColor")
   internal enum icon {
-    internal static let exclamation: String = "exclamation"
+    internal static let exclamationIcon: String = "exclamationIcon"
+    internal static let magnifyingGlassIcon: String = "magnifyingGlassIcon"
     internal static let warningIcon: String = "warningIcon"
   }
   internal enum images {

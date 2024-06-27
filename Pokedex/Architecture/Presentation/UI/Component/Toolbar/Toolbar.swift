@@ -76,17 +76,14 @@ enum ToolbarItemsBuilder {
 enum ToolbarStyle {
     
     enum Main {
-        
         case logo
     }
     
     enum Navigation {
-        
         case backButton
     }
 }
 
 enum ToolbarAction {
-    
     case goBack
 }

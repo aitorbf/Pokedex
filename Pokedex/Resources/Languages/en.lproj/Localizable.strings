@@ -6,6 +6,7 @@
   
 */
 
+"pokedex_search_placeholder" = "Search...";
 "pokedex_empty" = "There are no Pokémon in the Pokédex";
 "pokedex_error" = "Unable to load the Pokédex, please try again";
 "pokedex_retry" = "Retry";
